@@ -39,14 +39,15 @@
 
     <script>
         const searchBtn = document.getElementById('search_btn')
+        const API_KEY = 'b3d86ea994e82d592722061be974018a';
         searchBtn.addEventListener('click', async () => {
             const searchField = document.getElementById('search_field');
             const searchFieldValue = searchField.value;
             searchField.value = '';
-            // document.getElementById('city_name').innerText = searchField;
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${searchFieldValue}&appid=b3d86ea994e82d592722061be974018a`
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${searchFieldValue}&appid=${API_KEY}&units=metric`;
             const res = await fetch(url)
             const data = await res.json()
+            console.log(data)
             displayTemperature(data)
         })
 
@@ -57,23 +58,9 @@
             const name = document.getElementById('city_name');
             const temp = document.getElementById('temp');
             iconImg.src = `https://openweathermap.org/img/wn/${temperature.weather[0].icon}@2x.png`
-           name.innerText = temperature.name;
-           temp.innerText = temperature.main.temp
-        //    icon.innerText = temperature.weather[0].icon;
+            name.innerText = temperature.name;
+            temp.innerText = temperature.main.temp
         }
-
-        // const displayTemperature = (temperature) => {
-        //     console.log(temperature)
-        //     const temperatureContainer = document.getElementById('temperature')
-        //     temperatureContainer.textContent = '';
-        //     const div = document.createElement('div');
-        //     div.innerHTML = `
-        //     <h1>${temperature.name}</h1>
-        //     <h3><span>${temperature.main.temp}</span>&deg;C</h3>
-        //     <h1 class="lead">Clouds</h1>
-        //     `
-        //     temperatureContainer.appendChild(div)
-        // }
     </script>
 </body>
 
